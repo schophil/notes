@@ -16,13 +16,6 @@ createNote() {
   fi
 }
 
-syncNotes() {
-  cd $NOTES_HOME
-  git add -A
-  git commit -m "feat: sync notes"
-  git push
-}
-
 searchNote() {
   hits=( `grep -l -r $1 $NOTES_HOME/*.md` )
   for i in $hits; do
