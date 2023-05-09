@@ -12,7 +12,6 @@ createNote() {
     $EDITOR $note_file
   else
     # creating new note
-    touch $note_file
     $EDITOR $note_file
   fi
 }
