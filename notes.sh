@@ -16,6 +16,14 @@ createNote() {
   fi
 }
 
+listNotes() {
+  notes=(`ls $NOTES_HOME`)
+  for i in $notes; do
+    fileName=${i##*/}
+    echo "${fileName%.md}"
+  done
+}
+
 searchNote() {
   hits=( `grep -l -r $1 $NOTES_HOME/*.md` )
   for i in $hits; do
@@ -28,6 +36,8 @@ if [[ "$note_name" == "sync" ]]; then
   syncNotes
 elif [[ "$note_name" == "search" ]]; then
   searchNote $2
+elif [[ "$note_name" == "list" ]]; then
+  listNotes
 else
   createNote
 fi
