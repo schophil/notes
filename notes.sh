@@ -17,8 +17,7 @@ createNote() {
 }
 
 listNotes() {
-  notes=(`ls $NOTES_HOME`)
-  for i in $notes; do
+  for i in $NOTES_HOME/*; do
     fileName=${i##*/}
     echo "${fileName%.md}"
   done
