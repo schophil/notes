@@ -17,10 +17,17 @@ createNote() {
 }
 
 listNotes() {
-  for i in $NOTES_HOME/*; do
-    fileName=${i##*/}
-    echo "${fileName%.md}"
-  done
+  if [[ -n "$1" ]]; then
+    for i in $NOTES_HOME/$1*; do
+      fileName=${i##*/}
+      echo "${fileName%.md}"
+    done
+  else
+    for i in $NOTES_HOME/*; do
+      fileName=${i##*/}
+      echo "${fileName%.md}"
+    done
+  fi
 }
 
 searchNote() {
@@ -36,7 +43,7 @@ if [[ "$note_name" == "sync" ]]; then
 elif [[ "$note_name" == "search" ]]; then
   searchNote $2
 elif [[ "$note_name" == "list" ]]; then
-  listNotes
+  listNotes $2
 else
   createNote
 fi
