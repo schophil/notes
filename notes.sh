@@ -9,10 +9,12 @@ fi
 createNote() {
   note_file="$NOTES_HOME/$note_name.md"
   if [[ -e $note_file ]]; then
-    $EDITOR $note_file
+    $NOTES_EDITOR $note_file
   else
     # creating new note
-    $EDITOR $note_file
+    touch $note_file
+    echo "# $note_name" >> $note_file
+    $NOTES_EDITOR $note_file
   fi
 }
 
