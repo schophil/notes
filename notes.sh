@@ -32,7 +32,7 @@ createNote() {
   fi
 }
 
-listNotes() {
+listPages() {
   if [[ -n "$1" ]]; then
     for i in $NOTES_HOME/$1*; do
       fileName=${i##*/}
@@ -46,7 +46,7 @@ listNotes() {
   fi
 }
 
-searchNote() {
+searchPage() {
   hits=( `grep -l -r $1 $NOTES_HOME/*.md` )
   for i in $hits; do
     fileName=${i##*/}
@@ -54,11 +54,22 @@ searchNote() {
   done
 }
 
+openPage() {
+  page_file=$NOTES_HOME/$1.md
+  if [[ -e $page_file ]]; then
+    $NOTES_EDITOR $page_file
+  else
+    echo "page not found"
+  fi
+}
+
 if [[ -z "$1" ]]; then
   createNote
 elif [[ "$1" == "search" ]]; then
-  searchNote $2
+  searchPage $2
 elif [[ "$1" == "list" ]]; then
-  listNotes $2
+  listPages $2
+else
+  openPage $1
 fi
 
